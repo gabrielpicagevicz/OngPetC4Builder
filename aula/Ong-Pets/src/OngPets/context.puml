@@ -1,0 +1,15 @@
+@startuml
+!include https://raw.githubusercontent.com/adrianvlupu/C4-PlantUML/latest/C4_Context.puml
+
+LAYOUT_WITH_LEGEND()
+
+
+System(adm, "Administrativo", "Administrar.")
+
+System(ong, "Administrativo", "Administrar.")
+Person(colaborador, "Pessoa que trabalha na ONG", "Atendente")
+
+
+
+
+@enduml

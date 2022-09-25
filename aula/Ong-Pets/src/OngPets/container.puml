@@ -1,0 +1,25 @@
+@startuml
+!include https://raw.githubusercontent.com/adrianvlupu/C4-PlantUML/latest/C4_Container.puml
+
+LAYOUT_WITH_LEGEND()
+Person(user, "Usuário", "Funcionario da ONG/Cliente")
+
+System_Boundary(ong, "Ong Pets") {
+System(web, "Aplicação WEB", "App")
+System(app, "Mobile App", "Mobile")
+System(api, "API")
+
+ContainerDb(db, "Banco de Dados", "Armanezar Dados")
+}
+
+System_Ext(banc, "Banco", "API de Banco")
+System_Ext(rast, "Rastreamento", "Sistema de Rastreamento")
+
+Rel(web, api, "Usa", "JSON/HTTPS")
+Rel(app, api, "Usa", "JSON/HTTPS")
+Rel(user, web, "Usa")
+Rel(user, app, "Usa")
+Rel(api, db, "Lê e escreve")
+Rel(api, banc, "Consome")
+Rel(api, rast, "Consome")
+@enduml

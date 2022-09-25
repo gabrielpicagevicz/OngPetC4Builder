@@ -1,0 +1,44 @@
+@startuml
+!include https://raw.githubusercontent.com/adrianvlupu/C4-PlantUML/latest/C4_Container.puml
+
+LAYOUT_WITH_LEGEND()
+
+System(web, "Aplicação WEB", "App")
+System(app, "Mobile App", "Mobile")
+System_Ext(banc, "Banco", "API de Banco")
+System_Ext(rast, "Rastreamento", "Sistema de Rastreamento")
+
+
+
+System_Boundary(api, "API") {
+
+   Container(auth, "Autenticação", "Spring REST controller", "Sistema de autenticação/autorização")
+   Container(log, "Logística", "Spring REST controller", "Controle de veículos e armazenamento")
+   Container(fin, "Financeiro", "Spring REST controller", "Operações financeiras")
+   Container(adm, "Administração", "Spring REST controller", "Processos internos e relatórios")
+   Container(ops, "Operacional", "Spring REST controller", "Registro de operações")
+
+   Rel(app, ops, "Usa", "JSON/Http")
+   Rel(app, auth, "Usa", "JSON/Http")
+   
+   Rel(web, auth, "Usa", "JSON/Http")
+   Rel(web, ops, "Usa", "JSON/Http")
+   Rel(web, fin, "Usa", "JSON/Http")
+   Rel(web, adm, "Usa", "JSON/Http")
+   Rel(web, log, "Usa", "JSON/Http")
+
+   Rel(fin, banc, "Consome", "JSON/Http")
+   Rel(log, rast, "Consome", "HTML")
+
+}
+
+
+
+ContainerDb(db, "Banco de Dados", "Armanezar Dados")
+
+
+Rel(api, db, "Lê e escreve", "JDBC")
+
+
+
+@enduml

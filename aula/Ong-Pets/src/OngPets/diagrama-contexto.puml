@@ -1,0 +1,18 @@
+@startuml
+!include https://raw.githubusercontent.com/adrianvlupu/C4-PlantUML/latest/C4_Container.puml
+
+'Mapa de contexto
+
+LAYOUT_WITH_LEGEND()
+Person(user, "Usuário", "Funcionario da ONG/Cliente")
+
+System(app, "Aplicação", "ONG")
+
+System_Ext(banc, "Banco", "API banco")
+System_Ext(rast, "Rastreamento", "Rastreamento")
+ 
+Rel(user, app, "Utiliza")
+Rel(app, banc, "Utiliza")
+Rel(app, rast, "Utiliza")
+
+@enduml
